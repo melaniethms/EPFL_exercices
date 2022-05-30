@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    
+</head>
+<body>
+    <script>
+        function SaveUserName(){
+            if (localStorage != null) {
+                UserName = window.prompt("Quel est votre prénom ? ");
+                localStorage.setItem("User Name", UserName);
+                alert("welcome " + UserName)
+            }
+        }
+    </script>
+    <div class="menu">
+        <br>
+        <a href= "/">Home</a> 
+        <br>
+        <a href= "/add">Add notes</a> 
+        <br>
+        <a href="/notes">View all notes</a>
+        <br>
+        <a href="/search-results">Search</a>
+        <br>     
+    </div>
+    <div class="search">
+        <input type="text" value="Enter your search ..." id="search-value">
+        <input type="button" value="submit" id="search-button">
+        <!-- comment le button peut diriger vers /search-results ?
+        au passage sauver le contenu de search-value -->
+    </div>
+    <div>
+        <h1>Welcome back {{ username }}</h1>
+    </div>
+</body>
+</html>

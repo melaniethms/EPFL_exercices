@@ -1,0 +1,59 @@
+html{
+    background-color: rgb(205, 205, 205);
+}
+body{
+    padding: 0;
+    height: 100vh;
+}
+#wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%; 
+}
+#main {
+  padding: 8px;
+  border: 20px;
+  border-radius: 16px;
+  background-color: white;
+  display: table;
+  margin: auto; 
+  
+}
+
+#content {
+    background-color: rgb(214, 214, 214);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    margin: 4 px;
+    
+}
+.newItem {
+    font-size: 1rem;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    border-radius: 8px;
+    border-color: white;
+    border-width: 2px;
+    margin: 12px;
+
+}
+.button {
+    color: red;
+}
+#buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/* 
+-tout est centré
+-block gris en haut
+-text dans le block gris en blanc
+-bouton vert, jaune et rouge
+
+*/

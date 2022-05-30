@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>The persistant list </title>
+  <script src="script.js"></script>
+
+  <!-- J'intègre des bibliothèques externes me permettant d'utiliser Bootstraps, des google Fonts et icones -->
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"
+  />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" rel="stylesheet"/>
+  <!-- MDB -->
+  <scripttype="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
+</head>
+<body>
+    <section class="vh-100" style="background-color: #eee;">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-lg-9 col-xl-7">
+            <div class="card rounded-3">
+              <div class="card-body p-4">
+    
+                <h4 class="text-center my-3 pb-3">Ma super liste</h4>
+                <div class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
+                  <div class="table mb-4">
+                    <div class="list-wrapper">
+                      <ul id="list">
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+
+                <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
+                  <div class="col-12">
+                    <div class="form-outline">
+                      <input type="text" id="inputElement" name="inputElement" class="form-control" />
+                      <label class="form-label" for="form1" style="margin-left: 0px;">Entrez une tâche ici</label>
+                    <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 103.2px;"></div><div class="form-notch-trailing"></div></div></div>
+                  </div>
+                
+                  <div class="col-12">
+                    <button type="button" onclick="addElement()"  class="btn btn-primary ms-1">Ajouter</button>
+                  </div>
+                
+                  <div class="col-12">
+                    <button type="button" onclick="removeLast()" class="btn btn-warning">Supprimer le dernier élément</button>
+                  </div>
+                  <div class="col-12">
+                    <button type="button" onclick="clearAll()"  class="btn btn-danger">Supprimer tous les éléments</button>
+                  </div>
+                </form>
+
+    
+
+    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+</body>
+</html>
+
+<script>
+
+  const addElement = () =>{
+    const newElement = document.getElementById("inputElement").value;
+    if(!newElement || newElement == ""){
+      alert("La tâche ne peut pas être vide.")
+      return;
+    }
+    let list = parseList()
+    list.push(newElement)
+    strList = JSON.stringify(list);
+    updateList(strList)
+    addHTMLItem(newElement);
+    document.getElementById("inputElement").value = "";
+  };
+
+  const removeLast = () =>{
+    let list = parseList()
+    if(list && list.length > 0 ){
+      list.splice(list.length -1, 1)
+      strList = JSON.stringify(list);
+      updateList(strList)
+      removeLastHTMLItem();
+    }else{
+      alert("La liste est vide.\nImpossible de supprimer le dernier élément.")
+    }
+
+  };
+
+  const clearAll = () =>{
+    localStorage.removeItem("list");
+    const listWrapper = document.getElementById("list")
+    listWrapper.innerHTML = "";
+  };
+
+  const parseList = () =>{
+    let strList = localStorage.getItem("list")
+    let list = JSON.parse(strList)
+    return list ? list : [];
+  };
+
+  const updateList = (value) =>{
+    localStorage.setItem("list",value)
+  };
+
+  const updateHTML = (list) =>{
+    const listWrapper = document.getElementById("list")
+    for(let item of list){
+      const htmlListItem = document.createElement("li")
+      htmlListItem.innerText = item;
+      listWrapper.appendChild(htmlListItem)
+    }
+  };
+
+  const addHTMLItem = (item) =>{
+    const listWrapper = document.getElementById("list")
+    const htmlListItem = document.createElement("li")
+    htmlListItem.innerText = item;
+    listWrapper.appendChild(htmlListItem)
+  };
+
+  const removeLastHTMLItem = () =>{
+    const listWrapper = document.getElementById("list")
+    const lastElement = listWrapper.lastElementChild;
+    listWrapper.removeChild(lastElement);
+  };
+
+  console.log("Le Javascript fonctionne...")
+
+  /* J'initialise et récupère les informations stockées dans le navigateur */
+  let list = parseList();
+  updateHTML(list)
+
+</script>
+
+<style>
+  #button-wrapper{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+  }
+
+  .button{
+    width: 300px;
+    padding: 10px;
+  }
+</style>
+
+    © 2022 GitHub, Inc.
+
+    Terms
+    Privacy
+    Security
+    Status
+    Docs
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
+Loading complete
